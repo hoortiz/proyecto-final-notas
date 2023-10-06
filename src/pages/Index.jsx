@@ -10,9 +10,15 @@ export default function Index(){
     const [oldNota, setOldNota] = useState([])
 
     const getNotas = async ()=>{
-        const response = await fetch ('http://localhost:5001/api/notas')
-        const result = await response.json()
-        setNotas(result)
+        const errorAPI = "";
+        try {
+            const response = await fetch ('http://localhost:5001/api/notas')
+            const result = await response.json()
+            setNotas(result)
+          } catch (error) {
+            errorAPI = "Error accediendo al api";
+            console.log('There was an error', error);
+          }
     }
 
     useEffect(()=>{
@@ -32,12 +38,14 @@ export default function Index(){
         setOldNota(result)
     }
 
+
     return(
         <div className='contenedor-app'>
             <div className="row">
             <div className="col-sm-12 col-md-4">
                 <Form oldNota={oldNota}/>
             </div>
+            {errorAPI}
             <div className="col-sm-12 col-md-8">
                 <ListGroup> 
                     {notas.map((nota,index) => (
