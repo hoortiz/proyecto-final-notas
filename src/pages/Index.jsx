@@ -11,7 +11,7 @@ export default function Index(){
 
     const getNotas = async (errorAPI)=>{
         try {
-            const response = await fetch ('http://localhost:5001/api/notas')
+            const response = await fetch ('http://168.227.245.2/api/notas/')
             const result = await response.json()
             setNotas(result)
         } catch (error) {
@@ -24,14 +24,14 @@ export default function Index(){
     },[notas])
 
     const deleteNota = async(id)=>{
-        await fetch ('http://localhost:5001/api/notas/'+id,{        
+        await fetch ('http://168.227.245.2/api/notas/'+id,{        
         method: 'DELETE',
         mode: 'cors'
         })  
     }
 
     const getNota = async(id)=>{
-        const nota = await fetch ('http://localhost:5001/api/notas/'+id)
+        const nota = await fetch ('http://168.227.245.2/api/notas/'+id)
         const result = await nota.json()
         setOldNota(result)
     }

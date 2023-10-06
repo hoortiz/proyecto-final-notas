@@ -21,7 +21,7 @@ export default function Form({oldNota}){
         let params = [];
         
         if(nota._id){
-            URL = 'http://localhost:5001/api/notas/' + nota._id
+            URL = 'http://168.227.245.2/api/notas/' + nota._id
             params = {
                 method: 'PATCH',
                 body: JSON.stringify(nota),
@@ -30,7 +30,7 @@ export default function Form({oldNota}){
                 }
             }
         }else{
-            URL = 'http://localhost:5001/api/notas/'
+            URL = 'http://168.227.245.2/api/notas/'
             params = {
                 method: 'POST',
                 body: JSON.stringify(nota),
