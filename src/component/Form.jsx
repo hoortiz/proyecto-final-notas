@@ -53,8 +53,8 @@ export default function Form({oldNota}){
 
     useEffect(()=>{
         setNota({...nota,...oldNota})
-        
-    },[oldNota])
+    },[oldNota]);
+
   return(
     <div className="card">
         <div className="card-header">

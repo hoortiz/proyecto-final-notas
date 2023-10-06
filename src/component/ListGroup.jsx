@@ -1,4 +1,4 @@
-import React, {Children} from 'react'
+import React, {children} from 'react'
 
 
 export default function ListGroup( {children}) {
