@@ -8,11 +8,13 @@ export default function Index(){
 
     const [notas, setNotas] = useState([])
     const [oldNota, setOldNota] = useState([])
+    const URL = 'http://168.227.245.2/api/notas/'
 
     const getNotas = async (errorAPI)=>{
         try {
-            const response = await fetch ('http://168.227.245.2/api/notas/')
+		const response = await fetch (URL)
             const result = await response.json()
+            console.log('URL:'+URL)
             setNotas(result)
         } catch (error) {
             console.log("Error accediendo al API:" + error);
@@ -24,14 +26,14 @@ export default function Index(){
     },[notas])
 
     const deleteNota = async(id)=>{
-        await fetch ('http://168.227.245.2/api/notas/'+id,{        
+        await fetch (URL+id,{        
         method: 'DELETE',
         mode: 'cors'
         })  
     }
 
     const getNota = async(id)=>{
-        const nota = await fetch ('http://168.227.245.2/api/notas/'+id)
+        const nota = await fetch (URL+id)
         const result = await nota.json()
         setOldNota(result)
     }
@@ -39,18 +41,29 @@ export default function Index(){
 
     return(
         <div className='contenedor-app'>
-            <div className="row">
+            <div className="header">
+				<h1>Proyecto Final Henrry Ortiz</h1>
+			</div>
+            
+			<div className="row">
+            
+            <div className="col-sm-12 col-md-8">
+				<div className='card'>
+					<div className="card-header">
+						Notas
+					</div>
+					<ListGroup className=''> 
+						{notas.map((nota,index) => (
+							<Notas key={index} deleteNota={deleteNota} getNota={getNota} id={nota._id} title={nota.title} content={nota.content}/>
+						))}
+					</ListGroup>
+				</div>
+            </div>
+
             <div className="col-sm-12 col-md-4">
                 <Form oldNota={oldNota}/>
             </div>
-            
-            <div className="col-sm-12 col-md-8">
-                <ListGroup> 
-                    {notas.map((nota,index) => (
-                        <Notas key={index} deleteNota={deleteNota} getNota={getNota} id={nota._id} title={nota.title} content={nota.content}/>
-                    ))}
-                </ListGroup>
-            </div>
+
             </div>
         </div>
     )

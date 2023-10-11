@@ -17,11 +17,11 @@ export default function Form({oldNota}){
     }
 
     const saveNota = async ()=> {
-        let URL = '';
+        let URL = 'http://168.227.245.2/api/notas/';
         let params = [];
         
         if(nota._id){
-            URL = 'http://168.227.245.2/api/notas/' + nota._id
+            URL = URL + nota._id
             params = {
                 method: 'PATCH',
                 body: JSON.stringify(nota),
@@ -30,7 +30,6 @@ export default function Form({oldNota}){
                 }
             }
         }else{
-            URL = 'http://168.227.245.2/api/notas/'
             params = {
                 method: 'POST',
                 body: JSON.stringify(nota),
